@@ -1,0 +1,100 @@
+<!-- 
+
+    Фреймворк Vue.js
+
+Урок 4. Семинар: Методы и работа с контентом
+Продолжаем создание макета https://www.figma.com/file/okdYD45Tj2JpKsNASccUmf/Interior-Design-Webflow-Website-Template-(Community)-(Copy)-(Copy)?type=design&node-id=209-15&t=VK2zHccBmhGGNIzu-0 
+
+Домашнее задание 2 страница Blog
+
+Что мы можем заметить в проекте, что часть "Articles & News" повторяется, 
+как итог, вам необходимо создать блок Articles & News с помощью vue.js где данные 
+для вёрстки будут храниться в массиве объектов и выводить на страницу с помощью цикла v-for
+
+Задание VUE
+Вы разрабатываете приложение для отображения и сортировки списка товаров. 
+У вас есть массив объектов products, где каждый объект представляет товар 
+с его названием и ценой. 
+Вам необходимо отобразить список товаров и предоставить пользователю возможность 
+сортировать товары по цене (по возрастанию и по убыванию). -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="product in products" :key="product.id">
+                {{product.price}} - {{ product.name }}
+            </li>
+        </ul>
+        <button @click="sortUp">Сортировать по возрастанию</button>
+        <button @click="sortDown">Сортировать по убыванию</button>
+    </div>
+    <!-- версия для разработки, отображает полезные предупреждения в консоли -->
+    <script src=" https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                products: [
+                    {
+                        id: 0,
+                        name: 'Молоко',
+                        amount: 0,
+                        isBye: true,
+                        price: 10.56,
+                    },
+                    {
+                        id: 1,
+                        name: 'Мясо',
+                        amount: 0,
+                        isBye: false,
+                        price: 100.56,
+                    },
+                    {
+                        id: 2,
+                        name: 'Хлеб',
+                        amount: 0,
+                        isBye: false,
+                        price: 50.56,
+                    },
+                    {
+                        id: 3,
+                        name: 'Яблоки',
+                        amount: 0,
+                        isBye: false,
+                        price: 1.5,
+                    },
+                ],
+
+            },
+            methods: {
+                compareProductsUp(prod1, prod2) {
+                    return prod1.price - prod2.price;
+                },
+                compareProductsDown(prod1, prod2) {
+                    return prod2.price - prod1.price;
+                },
+
+                sortUp() {
+                    this.products.sort(this.compareProductsUp);
+                    // console.log(this.products);
+                },
+                sortDown() {
+                    this.products.sort(this.compareProductsDown);
+                    // console.log(this.products);
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>
